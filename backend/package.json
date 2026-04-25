@@ -1,0 +1,15 @@
+{
+  "name": "cets-backend",
+  "version": "1.0.0",
+  "description": "CETS – Campus Event & Ticketing System Backend",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "db:init": "psql -U postgres -c \"CREATE DATABASE cets_db;\" 2>/dev/null; psql -U postgres -d cets_db -f src/models/schema.sql && psql -U postgres -d cets_db -f src/models/seed.sql",
+    "db:seed": "psql -U postgres -d cets_db -f src/models/seed.sql"
+  },
+  "keywords": [],
+  "author": "MUST",
+  "license": "MIT"
+}
