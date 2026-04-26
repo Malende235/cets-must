@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-hot-toast';
-import { UserCircleIcon, IdentificationIcon, EnvelopeIcon, BriefcaseIcon } from '@heroicons/react/24/outline';
+import { UserCircleIcon, IdentificationIcon, EnvelopeIcon, BriefcaseIcon, StarIcon } from '@heroicons/react/24/outline';
+import { useRevenueCat } from '../../context/RevenueCatContext';
 
 export default function Profile() {
   const { user } = useAuth();
+  const { isPro, customerInfo } = useRevenueCat();
   const [loading, setLoading] = useState(false);
 
   // Fallback defaults if user somehow null
@@ -42,11 +44,24 @@ export default function Profile() {
             <span className={`mt-2 badge ${user?.role === 'Administrator' ? 'badge-purple' : user?.role === 'Organizer' ? 'badge-gold' : 'badge-blue'} px-3 py-1 font-bold`}>
               {user?.role}
             </span>
-            <div className="w-full mt-6 pt-6 border-t border-gray-200">
-               <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest text-left mb-2">Account Status</p>
-               <div className="flex justify-between items-center">
-                 <span className="text-sm font-medium text-gray-700">Registration</span>
-                 <span className="badge-green">Active</span>
+            <div className="w-full mt-6 pt-6 border-t border-gray-200 space-y-4">
+               <div>
+                 <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest text-left mb-2">Account Status</p>
+                 <div className="flex justify-between items-center">
+                   <span className="text-sm font-medium text-gray-700">Registration</span>
+                   <span className="badge-green">Active</span>
+                 </div>
+               </div>
+
+               <div>
+                 <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest text-left mb-2">Membership</p>
+                 <div className="flex justify-between items-center p-3 rounded-lg bg-blue-50 border border-blue-100">
+                    <div className="flex items-center gap-2">
+                      <StarIcon className={`w-4 h-4 ${isPro ? 'text-yellow-500 fill-yellow-500' : 'text-gray-400'}`} />
+                      <span className="text-sm font-bold text-blue-900">{isPro ? 'CETS Pro' : 'Free Member'}</span>
+                    </div>
+                    {isPro && <span className="text-[10px] text-blue-600 font-medium">Expires: {new Date(customerInfo?.entitlements?.active['cets Pro']?.expirationDate).toLocaleDateString()}</span>}
+                 </div>
                </div>
             </div>
           </div>

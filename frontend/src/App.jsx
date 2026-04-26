@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
+import { RevenueCatProvider } from './context/RevenueCatContext';
 import { ProtectedRoute, RoleRoute } from './routes/ProtectedRoute';
 
 // Layouts
@@ -47,44 +48,46 @@ export default function App() {
   return (
     <Router>
       <AuthProvider>
-        <Toaster position="top-right" />
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<PublicLayout><Landing /></PublicLayout>} />
-          <Route path="/events" element={<PublicLayout><Landing /></PublicLayout>} />
-          <Route path="/event/:id" element={<PublicLayout><EventDetail /></PublicLayout>} />
-          <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
-          <Route path="/help" element={<PublicLayout><Help /></PublicLayout>} />
-          
-          {/* Auth Routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-
-          {/* Protected Routes (Dashboard Layout) */}
-          <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
-            {/* Student */}
-            <Route path="/dashboard" element={<RoleRoute roles={['Student']}><StudentDashboard /></RoleRoute>} />
-            <Route path="/purchase/:id" element={<RoleRoute roles={['Student']}><Purchase /></RoleRoute>} />
-            <Route path="/confirmation" element={<RoleRoute roles={['Student']}><Confirmation /></RoleRoute>} />
-            <Route path="/my-tickets" element={<RoleRoute roles={['Student']}><MyTickets /></RoleRoute>} />
-
-            {/* Organizer */}
-            <Route path="/organizer" element={<RoleRoute roles={['Organizer', 'Administrator']}><OrganizerDashboard /></RoleRoute>} />
-            <Route path="/organizer/events" element={<RoleRoute roles={['Organizer', 'Administrator']}><MyEvents /></RoleRoute>} />
-            <Route path="/organizer/create" element={<RoleRoute roles={['Organizer', 'Administrator']}><CreateEvent /></RoleRoute>} />
-            <Route path="/organizer/events/:id/sales" element={<RoleRoute roles={['Organizer', 'Administrator']}><SalesDashboard /></RoleRoute>} />
-
-            {/* Admin */}
-            <Route path="/admin" element={<RoleRoute roles={['Administrator']}><AdminDashboard /></RoleRoute>} />
-            <Route path="/admin/users" element={<RoleRoute roles={['Administrator']}><ManageUsers /></RoleRoute>} />
+        <RevenueCatProvider>
+          <Toaster position="top-right" />
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<PublicLayout><Landing /></PublicLayout>} />
+            <Route path="/events" element={<PublicLayout><Landing /></PublicLayout>} />
+            <Route path="/event/:id" element={<PublicLayout><EventDetail /></PublicLayout>} />
+            <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
+            <Route path="/help" element={<PublicLayout><Help /></PublicLayout>} />
             
-            {/* Catch-all for protected */}
-            <Route path="/notifications" element={<div className="p-8 text-center">Notifications coming soon</div>} />
-            <Route path="/profile" element={<Profile />} />
-          </Route>
+            {/* Auth Routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+            {/* Protected Routes (Dashboard Layout) */}
+            <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
+              {/* Student */}
+              <Route path="/dashboard" element={<RoleRoute roles={['Student']}><StudentDashboard /></RoleRoute>} />
+              <Route path="/purchase/:id" element={<RoleRoute roles={['Student']}><Purchase /></RoleRoute>} />
+              <Route path="/confirmation" element={<RoleRoute roles={['Student']}><Confirmation /></RoleRoute>} />
+              <Route path="/my-tickets" element={<RoleRoute roles={['Student']}><MyTickets /></RoleRoute>} />
+
+              {/* Organizer */}
+              <Route path="/organizer" element={<RoleRoute roles={['Organizer', 'Administrator']}><OrganizerDashboard /></RoleRoute>} />
+              <Route path="/organizer/events" element={<RoleRoute roles={['Organizer', 'Administrator']}><MyEvents /></RoleRoute>} />
+              <Route path="/organizer/create" element={<RoleRoute roles={['Organizer', 'Administrator']}><CreateEvent /></RoleRoute>} />
+              <Route path="/organizer/events/:id/sales" element={<RoleRoute roles={['Organizer', 'Administrator']}><SalesDashboard /></RoleRoute>} />
+
+              {/* Admin */}
+              <Route path="/admin" element={<RoleRoute roles={['Administrator']}><AdminDashboard /></RoleRoute>} />
+              <Route path="/admin/users" element={<RoleRoute roles={['Administrator']}><ManageUsers /></RoleRoute>} />
+              
+              {/* Catch-all for protected */}
+              <Route path="/notifications" element={<div className="p-8 text-center">Notifications coming soon</div>} />
+              <Route path="/profile" element={<Profile />} />
+            </Route>
+
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </RevenueCatProvider>
       </AuthProvider>
     </Router>
   );

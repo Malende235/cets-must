@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import api from '../../api/axios';
+import api, { BASE_URL } from '../../api/axios';
 import { useAuth } from '../../context/AuthContext';
 import { PageSpinner } from '../../components/Spinner';
 import { format } from 'date-fns';
@@ -43,7 +43,7 @@ export default function EventDetail() {
       <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
         <div className="h-64 sm:h-96 w-full relative bg-gray-100">
           {event.bannerImage ? (
-             <img src={`http://localhost:5000${event.bannerImage}`} alt={event.title} className="w-full h-full object-cover" />
+             <img src={`${BASE_URL}${event.bannerImage}`} alt={event.title} className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-primary-800 to-primary-900 flex items-center justify-center">
               <TicketIcon className="w-32 h-32 text-primary-700 opacity-30" />

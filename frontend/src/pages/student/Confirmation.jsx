@@ -1,5 +1,6 @@
 import { useLocation, Link, Navigate } from 'react-router-dom';
 import { CheckCircleIcon, ArrowDownTrayIcon, TicketIcon } from '@heroicons/react/24/outline';
+import { API_URL } from '../../api/axios';
 
 export default function Confirmation() {
   const { state } = useLocation();
@@ -8,7 +9,7 @@ export default function Confirmation() {
   if (!booking) return <Navigate to="/dashboard" replace />;
 
   const handleDownload = () => {
-    window.location.href = `http://localhost:5000/api/tickets/${booking.ticket.ticketID}/pdf`;
+    window.location.href = `${API_URL}/tickets/${booking.ticket.ticketID}/pdf`;
   };
 
   return (

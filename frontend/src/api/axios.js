@@ -1,10 +1,16 @@
 import axios from 'axios';
 
+const API_BASE = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:5000/api`;
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || `http://${window.location.hostname}:5000/api`,
+  baseURL: API_BASE,
   withCredentials: true,
   timeout: 15000,
 });
+
+export const API_URL = API_BASE;
+export const BASE_URL = API_BASE.replace(/\/api$/, '');
+
 
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('token');

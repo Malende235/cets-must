@@ -5,8 +5,11 @@ import {
   UserGroupIcon, Cog6ToothIcon, ChartBarIcon,
   ClipboardDocumentListIcon, PlusCircleIcon,
   ArrowRightOnRectangleIcon, QuestionMarkCircleIcon,
-  ShieldCheckIcon
+  ShieldCheckIcon, RocketLaunchIcon
 } from '@heroicons/react/24/outline';
+import { useRevenueCat } from '../context/RevenueCatContext';
+import Paywall from './Paywall';
+import { useState } from 'react';
 
 const SideLink = ({ to, icon: Icon, children }) => (
   <NavLink
@@ -22,7 +25,9 @@ const SideLink = ({ to, icon: Icon, children }) => (
 
 export default function Sidebar() {
   const { user, logout } = useAuth();
+  const { isPro } = useRevenueCat();
   const navigate = useNavigate();
+  const [showPaywall, setShowPaywall] = useState(false);
 
   const handleLogout = async () => {
     await logout();
@@ -62,8 +67,11 @@ export default function Sidebar() {
           <div className="w-10 h-10 bg-primary-900 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0">
             {user?.fullName?.charAt(0).toUpperCase()}
           </div>
-          <div className="min-w-0">
-            <p className="font-semibold text-sm text-gray-900 truncate">{user?.fullName}</p>
+            <div className="flex items-center gap-1.5">
+              <p className="font-semibold text-sm text-gray-900 truncate">{user?.fullName}</p>
+              {isPro && (
+                <span className="px-1.5 py-0.5 rounded text-[10px] bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold tracking-tight">PRO</span>
+              )}
             <p className="text-xs text-gray-500 truncate">{user?.role}</p>
           </div>
         </div>
@@ -82,7 +90,22 @@ export default function Sidebar() {
           <SideLink to="/profile" icon={Cog6ToothIcon}>Profile settings</SideLink>
           <SideLink to="/help" icon={QuestionMarkCircleIcon}>Help &amp; support</SideLink>
         </div>
+
+        {!isPro && (
+          <button 
+            onClick={() => setShowPaywall(true)}
+            className="mt-6 mx-3 flex items-center gap-2 p-3 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-xl text-blue-700 hover:from-blue-100 transition-all group"
+          >
+            <RocketLaunchIcon className="w-5 h-5 text-blue-600 animate-pulse" />
+            <div className="text-left">
+              <p className="text-xs font-bold uppercase tracking-wide">Upgrade</p>
+              <p className="text-[10px] text-blue-600/80">Get CETS Pro features</p>
+            </div>
+          </button>
+        )}
       </nav>
+
+      <Paywall isOpen={showPaywall} onClose={() => setShowPaywall(false)} />
 
       {/* Sign out */}
       <div className="pt-4 border-t">

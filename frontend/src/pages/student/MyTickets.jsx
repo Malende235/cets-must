@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import api from '../../api/axios';
+import api, { API_URL } from '../../api/axios';
 import { PageSpinner } from '../../components/Spinner';
 import EmptyState from '../../components/EmptyState';
 import { ArrowDownTrayIcon, XCircleIcon, TicketIcon } from '@heroicons/react/24/outline';
@@ -76,7 +76,7 @@ export default function MyTickets() {
                   <span className="text-xs font-bold text-gray-500">{t.quantity} Ticket(s)</span>
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() => window.location.href = `http://localhost:5000/api/tickets/${t.ticketID}/pdf`}
+                      onClick={() => window.location.href = `${API_URL}/tickets/${t.ticketID}/pdf`}
                       className="p-2 text-primary-600 hover:bg-primary-50 rounded-lg transition-colors border border-transparent hover:border-primary-100"
                       title="Download PDF"
                     >

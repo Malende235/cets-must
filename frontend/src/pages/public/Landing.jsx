@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import api from '../../api/axios';
+import api, { BASE_URL } from '../../api/axios';
 import { PageSpinner } from '../../components/Spinner';
 import { MagnifyingGlassIcon, CalendarIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
@@ -117,7 +117,7 @@ export default function Landing() {
                   <Link to={`/event/${event.eventID}`} key={event.eventID} className="group card-hover overflow-hidden flex flex-col">
                     <div className="h-48 bg-gray-200 relative overflow-hidden">
                       {event.bannerImage ? (
-                        <img src={`http://localhost:5000${event.bannerImage}`} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <img src={`${BASE_URL}${event.bannerImage}`} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-primary-800 to-primary-900 flex items-center justify-center">
                           <TicketIcon className="w-16 h-16 text-primary-700 opacity-50" />
