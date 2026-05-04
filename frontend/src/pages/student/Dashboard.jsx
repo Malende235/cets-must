@@ -5,10 +5,12 @@ import { useAuth } from '../../context/AuthContext';
 import { PageSpinner } from '../../components/Spinner';
 import EmptyState from '../../components/EmptyState';
 import { format } from 'date-fns';
-import { CalendarIcon, TicketIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { CalendarIcon, TicketIcon, MapPinIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
+import { useRevenueCat } from '../../context/RevenueCatContext';
 
 export default function StudentDashboard() {
   const { user } = useAuth();
+  const { isPro } = useRevenueCat();
   const [stats, setStats] = useState({ tickets: 0, notifications: 0 });
   const [upcomingTickets, setUpcomingTickets] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
@@ -46,7 +48,7 @@ export default function StudentDashboard() {
       </div>
 
       {/* Pro CTA Banner */}
-      {!user?.isPro && (
+      {!isPro && (
         <Link to="/pro" className="block relative overflow-hidden bg-gradient-to-r from-gold-400 to-gold-600 rounded-2xl p-4 text-gold-950 shadow-lg group hover:scale-[1.01] transition-transform">
           <div className="flex items-center justify-between gap-4 relative z-10">
             <div className="flex items-center gap-3">

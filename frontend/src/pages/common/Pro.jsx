@@ -1,5 +1,6 @@
 import { useRevenueCat } from '../../context/RevenueCatContext';
 import { toast } from 'react-hot-toast';
+import { PageSpinner } from '../../components/Spinner';
 import { CheckBadgeIcon, RocketLaunchIcon, SparklesIcon, ShieldCheckIcon } from '@heroicons/react/24/solid';
 
 const features = [
@@ -30,7 +31,7 @@ const features = [
 ];
 
 export default function Pro() {
-  const { offerings, purchase, isPro } = useRevenueCat();
+  const { offerings, purchase, isPro, loadingRC } = useRevenueCat();
 
   const handlePurchase = async (pkg) => {
     toast.loading('Processing upgrade...', { id: 'purchase' });
@@ -43,6 +44,8 @@ export default function Pro() {
       toast.dismiss('purchase');
     }
   };
+
+  if (loadingRC) return <PageSpinner />;
 
   const mainOffering = offerings?.current || (offerings?.all ? Object.values(offerings.all)[0] : null);
   const packages = mainOffering?.availablePackages || [];

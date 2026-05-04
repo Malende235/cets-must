@@ -37,6 +37,7 @@ export default function AdminReports() {
   useEffect(() => { fetchReports(); }, []);
 
   if (loading) return <PageSpinner />;
+  if (!eventsData || !salesData || !usersData) return <div className="p-8 text-center text-gray-500 border rounded-2xl bg-gray-50">Unable to load system reports. Please check your connection.</div>;
 
   const { summary: eventSummary, events } = eventsData;
   const { salesByDay, summary: saleSummary } = salesData;

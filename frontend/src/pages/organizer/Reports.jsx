@@ -32,6 +32,7 @@ export default function OrganizerReports() {
   useEffect(() => { fetchReports(); }, []);
 
   if (loading) return <PageSpinner />;
+  if (!eventsData || !salesData) return <div className="p-8 text-center text-gray-500 border rounded-2xl bg-gray-50">Unable to load report data. Please try again later.</div>;
 
   const { summary, events } = eventsData;
   const { salesByDay, summary: saleSummary } = salesData;
