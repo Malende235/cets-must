@@ -42,9 +42,11 @@ export default function Sidebar() {
   ];
 
   const organizerLinks = [
-    { to: '/organizer',         icon: HomeIcon,              label: 'Dashboard' },
-    { to: '/organizer/events',  icon: CalendarDaysIcon,       label: 'My events' },
-    { to: '/organizer/create',  icon: PlusCircleIcon,         label: 'Create event' },
+    { to: '/organizer',              icon: HomeIcon,                  label: 'Dashboard'    },
+    { to: '/organizer/events',       icon: CalendarDaysIcon,          label: 'My events'    },
+    { to: '/organizer/create',       icon: PlusCircleIcon,            label: 'Create event' },
+    { to: '/organizer/reports',      icon: ChartBarIcon,              label: 'Reports'      },
+    { to: '/organizer/audit-logs',   icon: ClipboardDocumentListIcon, label: 'Audit logs'   },
   ];
 
   const adminLinks = [

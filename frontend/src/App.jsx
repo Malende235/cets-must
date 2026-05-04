@@ -28,6 +28,8 @@ import OrganizerDashboard from './pages/organizer/Dashboard';
 import MyEvents from './pages/organizer/MyEvents';
 import CreateEvent from './pages/organizer/CreateEvent';
 import SalesDashboard from './pages/organizer/SalesDashboard';
+import OrganizerReports from './pages/organizer/Reports';
+import OrganizerAuditLogs from './pages/organizer/AuditLogs';
 
 // Admin Pages
 import AdminDashboard from './pages/admin/Dashboard';
@@ -75,6 +77,8 @@ export default function App() {
               <Route path="/organizer/events" element={<RoleRoute roles={['Organizer', 'Administrator']}><MyEvents /></RoleRoute>} />
               <Route path="/organizer/create" element={<RoleRoute roles={['Organizer', 'Administrator']}><CreateEvent /></RoleRoute>} />
               <Route path="/organizer/events/:id/sales" element={<RoleRoute roles={['Organizer', 'Administrator']}><SalesDashboard /></RoleRoute>} />
+              <Route path="/organizer/reports" element={<RoleRoute roles={['Organizer', 'Administrator']}><OrganizerReports /></RoleRoute>} />
+              <Route path="/organizer/audit-logs" element={<RoleRoute roles={['Organizer', 'Administrator']}><OrganizerAuditLogs /></RoleRoute>} />
 
               {/* Admin */}
               <Route path="/admin" element={<RoleRoute roles={['Administrator']}><AdminDashboard /></RoleRoute>} />

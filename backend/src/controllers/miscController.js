@@ -90,4 +90,26 @@ const getOrganizerStats = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
-module.exports = { getAuditLogs, getMyNotifications, markAllRead, getAdminStats, getOrganizerStats };
+// GET /api/organizer/audit-logs  (Organizer – own actions only)
+const getOrganizerAuditLogs = async (req, res, next) => {
+  try {
+    const { page = 1, limit = 15 } = req.query;
+    const offset = (page - 1) * limit;
+    const uid = req.user.userID;
+
+    const countRes = await pool.query(`SELECT COUNT(*) FROM audit_logs WHERE "userID"=$1`, [uid]);
+    const total = parseInt(countRes.rows[0].count);
+
+    const result = await pool.query(
+      `SELECT al.*, u."fullName", u.email, u.role
+       FROM audit_logs al LEFT JOIN users u ON al."userID"=u."userID"
+       WHERE al."userID"=$1
+       ORDER BY al.timestamp DESC
+       LIMIT $2 OFFSET $3`,
+      [uid, limit, offset]
+    );
+    res.json({ logs: result.rows, total, page: +page, pages: Math.ceil(total / limit) });
+  } catch (err) { next(err); }
+};
+
+module.exports = { getAuditLogs, getMyNotifications, markAllRead, getAdminStats, getOrganizerStats, getOrganizerAuditLogs };
