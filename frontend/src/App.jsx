@@ -34,6 +34,9 @@ import OrganizerAuditLogs from './pages/organizer/AuditLogs';
 // Admin Pages
 import AdminDashboard from './pages/admin/Dashboard';
 import ManageUsers from './pages/admin/ManageUsers';
+import ManageEvents from './pages/admin/ManageEvents';
+import AdminReports from './pages/admin/Reports';
+import AdminAuditLogs from './pages/admin/AuditLogs';
 
 function PublicLayout({ children }) {
   return (
@@ -83,6 +86,9 @@ export default function App() {
               {/* Admin */}
               <Route path="/admin" element={<RoleRoute roles={['Administrator']}><AdminDashboard /></RoleRoute>} />
               <Route path="/admin/users" element={<RoleRoute roles={['Administrator']}><ManageUsers /></RoleRoute>} />
+              <Route path="/admin/events" element={<RoleRoute roles={['Administrator']}><ManageEvents /></RoleRoute>} />
+              <Route path="/admin/reports" element={<RoleRoute roles={['Administrator']}><AdminReports /></RoleRoute>} />
+              <Route path="/admin/audit-logs" element={<RoleRoute roles={['Administrator']}><AdminAuditLogs /></RoleRoute>} />
               
               {/* Catch-all for protected */}
               <Route path="/notifications" element={<div className="p-8 text-center">Notifications coming soon</div>} />
