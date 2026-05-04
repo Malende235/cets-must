@@ -16,6 +16,7 @@ import Register from './pages/public/Register';
 import About from './pages/public/About';
 import Help from './pages/public/Help';
 import Profile from './pages/common/Profile';
+import Pro from './pages/common/Pro';
 
 // Student Pages
 import StudentDashboard from './pages/student/Dashboard';
@@ -93,6 +94,7 @@ export default function App() {
               {/* Catch-all for protected */}
               <Route path="/notifications" element={<div className="p-8 text-center">Notifications coming soon</div>} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/pro" element={<Pro />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace />} />

@@ -94,8 +94,8 @@ export default function Sidebar() {
         </div>
 
         {!isPro && (
-          <button 
-            onClick={() => setShowPaywall(true)}
+          <NavLink 
+            to="/pro"
             className="mt-6 mx-3 flex items-center gap-2 p-3 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-xl text-blue-700 hover:from-blue-100 transition-all group"
           >
             <RocketLaunchIcon className="w-5 h-5 text-blue-600 animate-pulse" />
@@ -103,7 +103,7 @@ export default function Sidebar() {
               <p className="text-xs font-bold uppercase tracking-wide">Upgrade</p>
               <p className="text-[10px] text-blue-600/80">Get CETS Pro features</p>
             </div>
-          </button>
+          </NavLink>
         )}
       </nav>
 

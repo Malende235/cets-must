@@ -45,6 +45,25 @@ export default function StudentDashboard() {
         <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-primary-800 to-transparent pointer-events-none" />
       </div>
 
+      {/* Pro CTA Banner */}
+      {!user?.isPro && (
+        <Link to="/pro" className="block relative overflow-hidden bg-gradient-to-r from-gold-400 to-gold-600 rounded-2xl p-4 text-gold-950 shadow-lg group hover:scale-[1.01] transition-transform">
+          <div className="flex items-center justify-between gap-4 relative z-10">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                <RocketLaunchIcon className="w-6 h-6 text-gold-900 animate-pulse" />
+              </div>
+              <div>
+                <p className="font-bold">Upgrade to CETS Pro</p>
+                <p className="text-xs text-gold-900/80">Get early access to tickets and pay zero processing fees!</p>
+              </div>
+            </div>
+            <button className="bg-white/20 px-4 py-1.5 rounded-lg font-bold text-sm hover:bg-white/30 transition-colors">Learn More</button>
+          </div>
+          <div className="absolute top-0 right-0 bottom-0 w-32 bg-white/10 -skew-x-12 translate-x-16 group-hover:translate-x-12 transition-transform" />
+        </Link>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="stat-card">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Upcoming Events</p>
