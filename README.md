@@ -117,14 +117,13 @@ CETS/
 │   │   ├── services/   # Business logic (Payment, PDF, etc.)
 │   │   └── app.js      # Server entry point
 │   └── uploads/        # Local storage for event banners
-├── frontend/           # React Application
-│   ├── src/
-│   │   ├── components/ # Reusable UI components
-│   │   ├── context/    # Auth & Subscription providers
-│   │   ├── pages/      # View components
-│   │   └── api/        # Axios configurations
-│   └── public/         # Static assets
-└── assets/             # Project documentation & images
+└── frontend/           # React Application
+    ├── src/
+    │   ├── components/ # Reusable UI components
+    │   ├── context/    # Auth & Subscription providers
+    │   ├── pages/      # View components
+    │   └── api/        # Axios configurations
+    └── public/         # Static assets
 ```
 
 ---
